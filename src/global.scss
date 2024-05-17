@@ -36,6 +36,12 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+ion-header {
+  background: url('assets/img/pokedex-header.png') no-repeat;
+  min-height: 56px;
+  background-size: cover;
+}
+
 ion-text {
   color: #000;
   font-size: 1.2em;
