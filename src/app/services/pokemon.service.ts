@@ -47,7 +47,41 @@ export class PokemonService {
 
           await Promise.all(promises).then((responses) => {
             console.log(responses)
-          })
+            for (const respons of responses) {
+              const pokemonData = respons.data;
+              console.log(pokemonData)
+
+              const pokemonObj = new Pokemon();
+              pokemonObj.id = pokemonData.order;
+              pokemonObj.name = pokemonData.name;
+              pokemonObj.type1 = pokemonData.types[0].type.name
+              if (pokemonData.types[1]){
+                pokemonObj.type2 = pokemonData.types[0].type.name
+              }
+
+              pokemonObj.sprite = pokemonData.sprite.front_default;
+
+              pokemonObj.weight = pokemonData.weight / 10
+              pokemonObj.height = pokemonData.height / 10
+              pokemonObj.stats = pokemonData.stats;
+
+              pokemonObj.abilities = pokemonData.abilities
+                .filter(ab => !ab.is_hidden)
+                .map(ab => ab.ability.name);
+
+              const hiddenAbility = pokemonData.abilities
+                .find(ab => ab.is_hidden)
+                .map(ab => ab.ability.name);
+
+              if (hiddenAbility) {
+                pokemonObj.abilities = hiddenAbility.ability.name;
+              }
+
+              pokemons.push(pokemonObj);
+
+            }
+          });
+
         }
 
         return pokemons;
