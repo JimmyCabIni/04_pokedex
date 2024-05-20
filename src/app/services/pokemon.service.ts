@@ -27,7 +27,6 @@ export class PokemonService {
       return CapacitorHttp.get(options).then(async (response) => {
         let pokemons: Pokemon[] = [];
 
-        console.log(response);
         if (response.data) {
           const resuls = response.data.results;
           this.nextUrl = response.data.next;
@@ -46,10 +45,8 @@ export class PokemonService {
           }
 
           await Promise.all(promises).then((responses) => {
-            console.log(responses)
             for (const respons of responses) {
               const pokemonData = respons.data;
-              console.log(pokemonData)
 
               const pokemonObj = new Pokemon();
               pokemonObj.id = pokemonData.order;
@@ -69,11 +66,13 @@ export class PokemonService {
                 .filter(ab => !ab.is_hidden)
                 .map(ab => ab.ability.name);
 
+               console.log(pokemonObj.abilities);
+
               const hiddenAbility = pokemonData.abilities
                 .find(ab => ab.is_hidden);
 
               if (hiddenAbility) {
-                pokemonObj.abilities = hiddenAbility.ability.name;
+                pokemonObj.hiddenAbility = hiddenAbility.ability.name;
               }
 
               pokemons.push(pokemonObj);

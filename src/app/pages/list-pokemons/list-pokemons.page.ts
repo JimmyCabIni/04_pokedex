@@ -40,8 +40,6 @@ export class ListPokemonsPage implements OnInit {
 
       promise.then((result: Pokemon[]) => {
 
-        console.log(result)
-
         this.pokemons = this.pokemons.concat(result);
 
         console.log(this.pokemons);

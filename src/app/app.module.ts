@@ -6,6 +6,7 @@ import {IonicModule, IonicRouteStrategy, NavParams} from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import {GetStatPipe} from "./pipes/get-stat.pipe";
 
 @NgModule({
   declarations: [AppComponent],
